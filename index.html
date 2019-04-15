@@ -9,21 +9,36 @@
     <title>Pet Finder</title>
   </head>
   <body>
-    <h1>Pet Finder</h1>
+    <!-- <h1>Pet Finder</h1>
 
     <div class="button-container">
+      <h2>Search Filters</h2>
       <button id="btn1">Click Me</button>
       <button id="btn2">Click Me</button>
       <button id="btn3">Click Me</button>
       <button id="btn4">Click Me</button>
       <button id="btn5">Click Me</button>
 
-    </div>
+    </div> -->
 
+  <form id="petForm">
+    <input type="text" class="currentLocation" placeholder="Your Zip Code">
 
-    <!-- <form>
-        <input type="text" placeholder="movie title"/>
-        <input type="submit" value="Get Movie Info"/>
-    </form> -->
+      <label for="typeOfPet">Type of Pet</label>
+      <select name="typeOfPet" id="petType">
+      <option value="cat">Cat</option>
+      <option value="dog">Dog</option>
+      </select>
+
+     <label for="sexOfPet">Preferred Sex</label>
+      <select name="sexOfPet" id="petSex">
+        <option value="">No preference</option>
+        <option value="M">Show only Males</option>
+        <option value="F">Show only Females</option>
+      </select>
+
+    <input type="submit" name="submit" value="Find Friends" id="submit">
+  </form>
+<div id="availablePets"></div>
   </body>
 </html>
