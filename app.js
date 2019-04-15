@@ -8,16 +8,16 @@ pets.availablePets = $('#availablePets');
 pets.form = function() {
 	$('#petForm').on('submit', function(e){
 		e.preventDefault();
-		var userLocation = $('.currentLocation').val();
-    var petType = $('select#petType option:checked').val();
-    var petSex = $('select#petSex option:checked').val();
+		let userLocation = $('.currentLocation').val();
+    let petAge = $('select#petAge option:checked').val();
+    let petSex = $('select#petSex option:checked').val();
     console.log('click');
-		pets.petsCall(userLocation, petType, petSex);
+		pets.petsCall(userLocation, petAge, petSex);
 	});
 }
-// method chain the filters
-pets.petsCall = function(userLocation, petType, petSex) {
-	console.log(userLocation, petType, petSex);
+
+pets.petsCall = function(userLocation, petAge, petSex) {
+	console.log(userLocation, petAge, petSex);
 	$.ajax({
 		url: pets.petUrl,
 		method: 'GET',
@@ -26,24 +26,29 @@ pets.petsCall = function(userLocation, petType, petSex) {
 		data : {
 			key: pets.apiKey,
 			location: userLocation,
-      animal: petType,
+      animal: 'dog',
       sex: petSex,
 			format: 'json',
-			count: 10,
-			age:"",
-			status: 'A'
+			count: 20,
+			age: petAge,
+			status: 'A',
+      output: 'full'
 		}
 	}).then(function(results){
-  	var petResults = results.petfinder.pets.pet;
+  	let petResults = results.petfinder.pets.pet;
 		console.log(petResults);
-		for (var i = 0; i < petResults.length; ++i) {
-    	var petName = petResults[i].name.$t;
-      var petPhoto = petResults[i].media.photos.photo[0].$t;
+		for (let i = 0; i < petResults.length; ++i) {
+    	let petName = petResults[i].name.$t;
+      let petPhoto = petResults[i].media.photos.photo[0].$t;
+      let petContact = petResults[i].contacts;
       console.log(petName);
       console.log(petPhoto);
-    	pets.availablePets.append('<p>' + petName + '</p>');
-      pets.availablePets.append('<div><img src="' + petPhoto + '"></div>')
-  	}
+      console.log(petContact);
+    	$('#availablePets').append('<p>' + petName + '</p>');
+      $('#availablePets').append('<div><img src="' + petPhoto + '"></div>');
+      $('#availablePets').append('<p>' + petContact + '</p>');
+
+    }
 	});
 };
 

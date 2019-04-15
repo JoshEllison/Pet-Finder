@@ -9,36 +9,30 @@
     <title>Pet Finder</title>
   </head>
   <body>
-    <!-- <h1>Pet Finder</h1>
+  <h1>Dog Finder</h1>
 
-    <div class="button-container">
-      <h2>Search Filters</h2>
-      <button id="btn1">Click Me</button>
-      <button id="btn2">Click Me</button>
-      <button id="btn3">Click Me</button>
-      <button id="btn4">Click Me</button>
-      <button id="btn5">Click Me</button>
-
-    </div> -->
 
   <form id="petForm">
     <input type="text" class="currentLocation" placeholder="Your Zip Code">
 
-      <label for="typeOfPet">Type of Pet</label>
-      <select name="typeOfPet" id="petType">
-      <option value="cat">Cat</option>
-      <option value="dog">Dog</option>
+      <label for="ageOfPet">Age of Pet</label>
+      <select name="ageOfPet" id="petAge">
+      <option value="Baby">Baby</option>
+      <option value="Young">Young</option>
+      <option value="Adult">Adult</option>
+      <option value="Senior">Senior</option>
       </select>
 
-     <label for="sexOfPet">Preferred Sex</label>
+     <label for="sexOfPet">What Sex</label>
       <select name="sexOfPet" id="petSex">
         <option value="">No preference</option>
         <option value="M">Show only Males</option>
         <option value="F">Show only Females</option>
       </select>
 
-    <input type="submit" name="submit" value="Find Friends" id="submit">
+    <input type="submit" name="submit" value="Find Best Friend" id="submit">
   </form>
 <div id="availablePets"></div>
+<p>Results here</p>
   </body>
 </html>
