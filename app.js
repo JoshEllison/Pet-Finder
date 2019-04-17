@@ -3,7 +3,9 @@ let pets = {};
 pets.apiKey = "266448db5145b91a83605ba714f92e12";
 pets.apiToken ="7b70676a5b76f2ceee6488f96f4ab4c6";
 pets.petUrl = "https://api.petfinder.com/pet.find";
-pets.availablePets = $('#availablePets');
+// pets.availablePets = $('#availablePets');
+pets.availablePets = $('.container');
+
 
 pets.form = function() {
 	$('#petForm').on('submit', function(e){
@@ -29,7 +31,7 @@ pets.petsCall = function(userLocation, petAge, petSex) {
       animal: 'dog',
       sex: petSex,
 			format: 'json',
-			count: 20,
+			count: 30,
 			age: petAge,
 			status: 'A',
       output: 'full'
@@ -39,23 +41,77 @@ pets.petsCall = function(userLocation, petAge, petSex) {
 		console.log(petResults);
 		for (let i = 0; i < petResults.length; ++i) {
     	let petName = petResults[i].name.$t;
-      let petPhoto = petResults[i].media.photos.photo[0].$t;
+      let petPhoto = petResults[i].media.photos.photo[2].$t;
       let petPhone = petResults[i].contact.phone.$t;
-      let petEmail = petResults[i].contact.email.$t;
+      // let petEmail = petResults[i].contact.email.$t;
       let petDescription = petResults[i].description.$t;
-      console.log(petName);
-      console.log(petPhoto);
-      console.log(petPhone);
-    	$('#availablePets').append('<p>' + petName + '</p>');
-      $('#availablePets').append('<div><img src="' + petPhoto + '"></div>');
-      $('#availablePets').append('<li>' + petPhone + '</li>');
-      $('#contact').append('<li>' + petEmail + '</li>');
-      $('#availablePets').append('<li>' + petDescription + '</li>');
+
+//seperate divs for each dog
+//click into for more info
+//carosel for each dog
+// overall carosel
+// carosel with articles about benefits etc
+// foodsense.io look up for styling
+// $('<div id="foo" class="bar">text</div>').appendTo('body');
+
+			let $dogContainer = $('<div>').addClass('dog-box')
+			$('.container').append($dogContainer);
+
+			let $dogPic = $('<img>').addClass('dog-img');
+			$dogPic.attr('src', petPhoto);
+			$dogContainer.append($dogPic);
+
+			let $name = $('<div>').addClass('name');
+			$name.text(petName);
+			$dogContainer.append($name);
+
+			let $infoBtn = $('<button>').addClass('modalBtn').text('Click to learn more!');
+			$dogPic.append($infoBtn);
+
+
+
+
+
+
+			//
+			// const $recipeContainer = $('<div>').addClass('recipe-box')
+			//  $('.container').append($recipeContainer);
+			//  const $recipePic = $('<img>').addClass('recipe-img');
+			//  $recipePic.attr('src', recipeImg);
+			//  $recipeContainer.append($recipePic)
+
+
+			//  const $nutritionFacts = $('<div>').addClass('nutrition');
+			//  $nutritionFacts.text(nutrition);
+			//  const $ingredientsBtn = $('<button>').addClass('modalBtn').text('Click to see the ingredients!');
+			//  $recipeContainer.append($nutritionFacts);
+			//  $nutritionFacts.append($ingredientsBtn);
+			//  const $recipes = $('<a>').addClass('recipe-name').attr('href', recipeUrl);
+			//  $recipes.text(label)
+			//  $recipeContainer.append($recipes);
+
+
+
+		//
+			// let name = ('<div id="nameDiv">' + petName + '</div>')
+    	// $('.availablePets').append(name);
+			// let photo = ('<div><img src="' + petPhoto + '"></div>');
+      // $('.availablePets').append(photo);
+			//
+      // $('.availablePets').append('<li>' + petPhone + '</li>');
+      // $('.availablePets').append('<li>' + petDescription + '</li>');
+
+
+
+
+
+
 
     }
 	});
 };
-
-$(document).ready(function() {
+$(() => {
 	pets.form();
 });
+
+// if logic for undefined to remove undefined

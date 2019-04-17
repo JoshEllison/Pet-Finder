@@ -5,3 +5,25 @@ ul {
 li {
   list-style: none;
 }
+
+#petForm {
+  text-align: center;
+}
+
+h1  {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  height: 300px;
+}
+
+.dogContainer {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
