@@ -31,7 +31,7 @@ pets.petsCall = function(userLocation, petAge, petSex) {
       animal: 'dog',
       sex: petSex,
 			format: 'json',
-			count: 30,
+			count: 100,
 			age: petAge,
 			status: 'A',
       output: 'full'
@@ -41,7 +41,7 @@ pets.petsCall = function(userLocation, petAge, petSex) {
 		console.log(petResults);
 		for (let i = 0; i < petResults.length; ++i) {
     	let petName = petResults[i].name.$t;
-      let petPhoto = petResults[i].media.photos.photo[2].$t;
+      let petPhoto = petResults[i].media.photos.photo[3].$t;
       let petPhone = petResults[i].contact.phone.$t;
       // let petEmail = petResults[i].contact.email.$t;
       let petDescription = petResults[i].description.$t;
@@ -61,34 +61,18 @@ pets.petsCall = function(userLocation, petAge, petSex) {
 			$dogPic.attr('src', petPhoto);
 			$dogContainer.append($dogPic);
 
-			let $name = $('<div>').addClass('name');
-			$name.text(petName);
-			$dogContainer.append($name);
+			// let $name = $('<div>').addClass('name');
+			// $name.text(petName);
+			// $dogContainer.append($name);
 
 			let $infoBtn = $('<button>').addClass('modalBtn').text('Click to learn more!');
 			$dogPic.append($infoBtn);
 
+      // $dogContainer.append('<li>' + petDescription + '</li>');
 
 
 
 
-
-			//
-			// const $recipeContainer = $('<div>').addClass('recipe-box')
-			//  $('.container').append($recipeContainer);
-			//  const $recipePic = $('<img>').addClass('recipe-img');
-			//  $recipePic.attr('src', recipeImg);
-			//  $recipeContainer.append($recipePic)
-
-
-			//  const $nutritionFacts = $('<div>').addClass('nutrition');
-			//  $nutritionFacts.text(nutrition);
-			//  const $ingredientsBtn = $('<button>').addClass('modalBtn').text('Click to see the ingredients!');
-			//  $recipeContainer.append($nutritionFacts);
-			//  $nutritionFacts.append($ingredientsBtn);
-			//  const $recipes = $('<a>').addClass('recipe-name').attr('href', recipeUrl);
-			//  $recipes.text(label)
-			//  $recipeContainer.append($recipes);
 
 
 
@@ -99,7 +83,7 @@ pets.petsCall = function(userLocation, petAge, petSex) {
       // $('.availablePets').append(photo);
 			//
       // $('.availablePets').append('<li>' + petPhone + '</li>');
-      // $('.availablePets').append('<li>' + petDescription + '</li>');
+
 
 
 
@@ -113,5 +97,9 @@ pets.petsCall = function(userLocation, petAge, petSex) {
 $(() => {
 	pets.form();
 });
+
+			//  const $recipes = $('<a>').addClass('recipe-name').attr('href', recipeUrl);
+			//  $recipes.text(label)
+			//  $recipeContainer.append($recipes);
 
 // if logic for undefined to remove undefined
