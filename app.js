@@ -3,10 +3,9 @@ let pets = {};
 pets.apiKey = "266448db5145b91a83605ba714f92e12";
 pets.apiToken ="7b70676a5b76f2ceee6488f96f4ab4c6";
 pets.petUrl = "https://api.petfinder.com/pet.find";
-// pets.availablePets = $('#availablePets');
 pets.availablePets = $('.container');
 
-
+// filters
 pets.form = function() {
 	$('#petForm').on('submit', function(e){
 		e.preventDefault();
@@ -17,7 +16,7 @@ pets.form = function() {
 		pets.petsCall(userLocation, petAge, petSex);
 	});
 }
-
+//api call
 pets.petsCall = function(userLocation, petAge, petSex) {
 	console.log(userLocation, petAge, petSex);
 	$.ajax({
@@ -31,7 +30,7 @@ pets.petsCall = function(userLocation, petAge, petSex) {
       animal: 'dog',
       sex: petSex,
 			format: 'json',
-			count: 100,
+			count: 300,
 			age: petAge,
 			status: 'A',
       output: 'full'
@@ -43,52 +42,40 @@ pets.petsCall = function(userLocation, petAge, petSex) {
     	let petName = petResults[i].name.$t;
       let petPhoto = petResults[i].media.photos.photo[3].$t;
       let petPhone = petResults[i].contact.phone.$t;
-      // let petEmail = petResults[i].contact.email.$t;
       let petDescription = petResults[i].description.$t;
-
-//seperate divs for each dog
-//click into for more info
-//carosel for each dog
-// overall carosel
-// carosel with articles about benefits etc
-// foodsense.io look up for styling
-// $('<div id="foo" class="bar">text</div>').appendTo('body');
-
+			let moreInfo = petDescription;
 			let $dogContainer = $('<div>').addClass('dog-box')
 			$('.container').append($dogContainer);
 
-			let $dogPic = $('<img>').addClass('dog-img');
-			$dogPic.attr('src', petPhoto);
-			$dogContainer.append($dogPic);
-
-			// let $name = $('<div>').addClass('name');
-			// $name.text(petName);
-			// $dogContainer.append($name);
-
-			let $infoBtn = $('<button>').addClass('modalBtn').text('Click to learn more!');
-			$dogPic.append($infoBtn);
-
-      // $dogContainer.append('<li>' + petDescription + '</li>');
 
 
+//Modal
+			let $dogPic = $('<img>').addClass('dog-img').on('click', () => {
+				$('#modal-header').empty();
+				$('.dog-img').css('z-index', 0);
+				$('.info').css('z-index', -1);
+				$('<p>').text(petName).addClass('modal-info').appendTo('#modal-header');
+				$('<p2>').text(moreInfo + "\n").addClass('modal-info').appendTo('#modal-header');
+				$('<p3>').text(petPhone).addClass('modal-info').appendTo('#modal-header');
+
+				$('#modal').css('display', 'block');
+			});
 
 
-
-
-
-		//
-			// let name = ('<div id="nameDiv">' + petName + '</div>')
-    	// $('.availablePets').append(name);
-			// let photo = ('<div><img src="' + petPhoto + '"></div>');
-      // $('.availablePets').append(photo);
-			//
-      // $('.availablePets').append('<li>' + petPhone + '</li>');
+				$dogPic.attr('src', petPhoto);
+				$dogContainer.append($dogPic);
+				let $dogInfo = $('<div>').addClass('info');
+				$dogInfo.text(moreInfo);
 
 
 
-
-
-
+// exit modal
+		 $('#close').on('click', (event) => {
+		 event.preventDefault();
+		 $('#modal').css('display', 'none');
+		 $('.info').css('z-index', 0);
+		 $('.dog-img').css('z-index', 1);
+		 });
 
 
     }
@@ -97,9 +84,3 @@ pets.petsCall = function(userLocation, petAge, petSex) {
 $(() => {
 	pets.form();
 });
-
-			//  const $recipes = $('<a>').addClass('recipe-name').attr('href', recipeUrl);
-			//  $recipes.text(label)
-			//  $recipeContainer.append($recipes);
-
-// if logic for undefined to remove undefined
